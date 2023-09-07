@@ -1,0 +1,210 @@
+<app-navbar></app-navbar>
+
+<p-toast></p-toast>
+
+<section class="hero-wrap hero-wrap-2 js-fullheight"
+  style="background-image: url('../../assets/images/havali_araba_5.jpg');" data-stellar-background-ratio="0.5">
+  <div class="container">
+    <div class="page-info-area">
+      <div class="page-info">
+        <div class="title-section">
+          <h1>Pricing</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="overlay"></div>
+</section>
+
+<br>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 mt-2">
+      <div class="location-area">
+        <div class="row">
+          <div class="col-md-12">
+            <p>Pick Up Location</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h5>{{pickUpLocation}}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mt-2">
+      <div class="location-area">
+        <div class="row">
+          <div class="col-md-12">
+            <p>Drop Off Location</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h5>{{dropOffLocation}}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mt-2">
+      <div class="date-area">
+        <div class="row">
+          <div class="col-md-12">
+            <p>Pick Up Date</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h5>{{pickUpDate | date : 'dd/MM/yyyy'}}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 mt-2">
+      <div class="date-area">
+        <div class="row">
+          <div class="col-md-12">
+            <p>Drop Off Date</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h5>{{dropOffDate | date: 'dd/MM/yyyy'}}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container mb-5 mt-5">
+  <div class="row">
+    <div class="col-md-4 mt-3 mb-2" *ngFor="let car of cars">
+      <div class="car-area">
+        <!-- RESİM -->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="image-area">
+              <img class="img-fluid" src="{{car.arac_resmi}}" alt="{{car.arac_resmi}}">
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <div class="row mt-2">
+            <div class="col-md-4 header-area">
+              <h6>Marka</h6>
+            </div>
+            <div class="col-md-4 header-area">
+              <h6>Araç kilometresi</h6>
+            </div>
+            <div class="col-md-4 header-area">
+              <h6>Vites tipi</h6>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 car-content-area">
+              <h5>{{car.arac_adi}}</h5>
+            </div>
+            <div class="col-md-4 car-content-area">
+              <h5>{{car.arac_kilometre}}</h5>
+            </div>
+            <div class="col-md-4 car-content-area">
+              <h5>{{car.vites_tipi}}</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 header-area">
+              <h6>Yakıt tipi</h6>
+            </div>
+            <div class="col-md-4 header-area">
+              <h6>Araç tipi</h6>
+            </div>
+            <div class="col-md-4 header-area">
+              <h6>Koltuk sayısı</h6>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4 car-content-area">
+              <h5>{{car.yakit_tipi}}</h5>
+            </div>
+            <div class="col-md-4 car-content-area">
+              <h5>{{car.arac_tipi}}</h5>
+            </div>
+            <div class="col-md-4 car-content-area">
+              <h5>{{car.arac_koltuk}}</h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="car-price-area">
+                <h6>Ücret / Gün</h6>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="car-price-area">
+                <h5 style="color: #01d28e; font-weight: 600;">₺{{car.price}}</h5>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-md-12 mb-3" style="display: flex !important;
+            justify-content: center !important;
+            ">
+              <button class="reservation-btn" (click)="openReservation(car.id)">Rezervasyon</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-dialog *ngIf="selectedCar" [(visible)]="reservationDialog" [style]="{ width: '450px' }" header="New Reservation"
+  [modal]="true" styleClass="p-fluid">
+  <ng-template pTemplate="content" class="mb-2">
+
+    <div class="field">
+      <div class="row">
+        <div class="col-md-12">
+          <img class="img-fluid" style="border-radius: 5px;" src="{{selectedCar.arac_resmi}}"
+            alt="{{selectedCar.arac_resmi}}">
+        </div>
+      </div>
+    </div>
+
+    <div class="field mt-3">
+      <label class="mt-1" for="name">Araç alış konumu</label>
+      <input type="text" [disabled]="true" [(ngModel)]="reservationRequest.car_pickup_location" pInputText required />
+    </div>
+
+    <div class="field">
+      <label class="mt-1" for="name">Araç bırakış konumu</label>
+      <input type="text" [disabled]="true" [(ngModel)]="reservationRequest.car_dropoff_location" pInputText required />
+    </div>
+
+    <div class="field">
+      <label class="mt-1" for="name">Araç alış tarihi</label>
+      <input type="text" [disabled]="true" [(ngModel)]="reservationRequest.pick_Up_Date" pInputText required />
+    </div>
+
+    <div class="field">
+      <label class="mt-1" for="name">Araç bırakış tarihi</label>
+      <input type="text" [disabled]="true" [(ngModel)]="reservationRequest.choose_A_Date" pInputText required />
+    </div>
+
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+    <button pButton pRipple label="Create" icon="pi pi-check" class="p-button-text"
+      (click)="createReservation(reservationRequest)"></button>
+
+  </ng-template>
+
+</p-dialog>
+
+
+<app-footer></app-footer>

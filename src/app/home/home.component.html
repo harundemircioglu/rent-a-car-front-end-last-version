@@ -1,0 +1,261 @@
+<app-navbar></app-navbar>
+
+<p-toast></p-toast>
+
+<div class="hero-wrap ftco-degree-bg" style="background-image: url('../../assets/images/havali_araba_3.jpg');"
+  data-stellar-background-ratio="0.5">
+  <div class="overlay">
+    <div class="title-area">
+      <h1>Fast & Easy Way To Rent A Car</h1>
+      <p>
+        Welcome to Carbook Rentacar! We are here to make your car rental experience exceptional.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="car-filter-area">
+  <div class="container">
+    <div class="filter-area"
+      style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+
+      <mat-form-field>
+        <mat-label>Pick Up Location</mat-label>
+        <mat-select [(ngModel)]="selectedPickUpLocation">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Drop Off Location</mat-label>
+        <mat-select [(ngModel)]="selectedDropOffLocation">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Pick Up Date</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="selectedPickUpDate">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Drop Off Date</mat-label>
+        <input matInput [matDatepicker]="picker2" [(ngModel)]="selectedDropOffDate">
+        <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+
+      <div class="mb-4">
+        <button type="button" (click)="browseClicked()" class="btn btn-secondary btn-lg">Browse</button>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<div class="mb-5"></div>
+
+
+<!--heading--->
+<div class="testimonial-heading">
+  <span>BESTS</span>
+</div>
+
+<p-carousel [value]="cars" [numVisible]="3" [numScroll]="3" [circular]="true" [responsiveOptions]="responsiveOptions"
+  autoPlayInterval="3000">
+  <ng-template let-cars pTemplate="item">
+    <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
+      <div class="mb-3">
+        <img src="{{ cars.arac_resmi }}" [alt]="cars.arac_resmi" class="w-6 shadow-2 img-fluid" />
+      </div>
+      <div>
+        <h4 class="mb-1">{{ cars.arac_adi }}</h4>
+        <h6 class="mt-0 mb-3 car-popularite">{{cars.arac_popularite }}</h6>
+        <!-- <div class="car-buttons mt-5">
+                      <p-button type="button" styleClass="p-button p-button-rounded mr-2" icon="pi pi-search"></p-button>
+                      <p-button type="button" styleClass="p-button-success p-button-rounded mr-2" icon="pi pi-star-fill"></p-button>
+                  </div> -->
+      </div>
+    </div>
+  </ng-template>
+</p-carousel>
+
+<div class="mb-5"></div>
+
+<!--heading--->
+<div class="testimonial-heading">
+  <span>ABOUT</span>
+</div>
+
+<div class="responsive-container-block bigContainer">
+  <div class="responsive-container-block Container">
+    <img class="mainImg" src="../../assets/images/about.jpg">
+    <div class="allText aboveText">
+      <p class="text-blk headingText">
+        About Us
+      </p>
+      <!-- <p class="text-blk subHeadingText">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      </p> -->
+      <p class="text-blk description">
+        Welcome to CarBook! We aim to provide you with a comfortable and secure travel experience while you're on the
+        move. With our industry expertise and extensive fleet of vehicles, Rentacar offers high-quality rental services
+        to our customers.
+
+        Our mission is to make the car rental process easy for our customers and provide them with the freedom they need
+        during their travels. We offer a wide range of vehicles to suit every need, whether it's for business trips,
+        vacations, or daily use. Rest assured, you'll find vehicles that cater to all your requirements.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!--Testimonials------------------->
+<section id="testimonials">
+  <!--heading--->
+  <div class="testimonial-heading">
+    <span>COMMENTS</span>
+  </div>
+  <!--testimonials-box-container------>
+  <div class="testimonial-box-container">
+    <!--BOX-1-------------->
+    <div class="testimonial-box">
+      <!--top------------------------->
+      <div class="box-top">
+        <!--profile----->
+        <div class="profile">
+          <!--img---->
+          <div class="profile-img">
+            <img src="../../assets/images/person_1.jpg" />
+          </div>
+          <!--name-and-username-->
+          <div class="name-user">
+            <strong>Touseeq Ijaz</strong>
+            <span>@touseeqijazweb</span>
+          </div>
+        </div>
+        <!--reviews------>
+        <div class="reviews">
+          <i class="pi pi-star-fill"></i>
+          <i class="pi pi-star-fill"></i>
+          <i class="pi pi-star-fill"></i>
+          <i class="pi pi-star-fill"></i>
+          <i class="pi pi-star-fill"></i><!--Empty star-->
+        </div>
+      </div>
+      <!--Comments---------------------------------------->
+      <div class="client-comment">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus
+          architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt
+          blanditiis sed atque cumque.</p>
+      </div>
+    </div>
+    <!--BOX-2-------------->
+    <div class="testimonial-box">
+      <!--top------------------------->
+      <div class="box-top">
+        <!--profile----->
+        <div class="profile">
+          <!--img---->
+          <div class="profile-img">
+            <img src="../../assets/images/person_1.jpg" />
+          </div>
+          <!--name-and-username-->
+          <div class="name-user">
+            <strong>J.K Rowling</strong>
+            <span>@jkrowling</span>
+          </div>
+        </div>
+        <!--reviews------>
+        <div class="reviews">
+          <i class="pi pi-star-fill" style="font-size: 1rem"></i>
+          <i class="pi pi-star-fill" style="font-size: 1rem"></i>
+          <i class="pi pi-star-fill" style="font-size: 1rem"></i>
+          <i class="pi pi-star-fill" style="font-size: 1rem"></i>
+          <i class="pi pi-star-fill" style="font-size: 1rem"></i>
+          <!--Empty star-->
+        </div>
+      </div>
+      <!--Comments---------------------------------------->
+      <div class="client-comment">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus
+          architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt
+          blanditiis sed atque cumque.</p>
+      </div>
+    </div>
+    <!--BOX-3-------------->
+    <div class="testimonial-box">
+      <!--top------------------------->
+      <div class="box-top">
+        <!--profile----->
+        <div class="profile">
+          <!--img---->
+          <div class="profile-img">
+            <img src="../../assets/images/person_1.jpg" />
+          </div>
+          <!--name-and-username-->
+          <div class="name-user">
+            <strong>Harry Potter</strong>
+            <span>@DanielRedclief</span>
+          </div>
+        </div>
+        <!--reviews------>
+        <div class="reviews">
+          <i class="pi pi-star-fill"></i>
+          <i class="pi pi-star-fill"></i>
+          <i class="pi pi-star-fill"></i>
+          <i class="pi pi-star-fill"></i>
+          <i class="pi pi-star-fill"></i><!--Empty star-->
+        </div>
+      </div>
+      <!--Comments---------------------------------------->
+      <div class="client-comment">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus
+          architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt
+          blanditiis sed atque cumque.</p>
+      </div>
+    </div>
+    <!--BOX-4-------------->
+    <div class="testimonial-box">
+      <!--top------------------------->
+      <div class="box-top">
+        <!--profile----->
+        <div class="profile">
+          <!--img---->
+          <div class="profile-img">
+            <img src="../../assets/images/person_1.jpg" />
+          </div>
+          <!--name-and-username-->
+          <div class="name-user">
+            <strong>Oliva</strong>
+            <span>@Olivaadward</span>
+          </div>
+        </div>
+        <!--reviews------>
+        <div class="reviews">
+          <i class="pi pi-star-fill"></i>
+          <i class="pi pi-star-fill"></i>
+          <i class="pi pi-star-fill"></i>
+          <i class="pi pi-star-fill"></i>
+          <i class="pi pi-star-fill"></i><!--Empty star-->
+        </div>
+      </div>
+      <!--Comments---------------------------------------->
+      <div class="client-comment">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus
+          architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt
+          blanditiis sed atque cumque.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="mb-5"></div>
+
+
+<app-footer></app-footer>

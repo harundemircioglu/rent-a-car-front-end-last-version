@@ -1,0 +1,30 @@
+<app-navbar></app-navbar>
+
+<div class="hero-wrap ftco-degree-bg" style="background-image: url('../../assets/images/havali_araba_5.jpg');"
+  data-stellar-background-ratio="0.5">
+  <div class="overlay"></div>
+</div>
+
+<!-- LOGİN FORM  -->
+<div class="container">
+  <div class="main-form-area">
+    <div class="form-area">
+      <form>
+        <div class="form-element-area mt-3">
+          <input [(ngModel)]="loginRequest.Email" [ngModelOptions]="{standalone: true}" name="UserName" type="text" class="form-text" placeholder="Email">
+        </div>
+        <div class="form-element-area mt-3">
+          <input [(ngModel)]="loginRequest.Password" [ngModelOptions]="{standalone: true}" name="Password" type="password" class="form-text" placeholder="Şifre">
+        </div>
+        <div class="form-element-area mt-3 mb-3">
+          <button (click)="login()" type="button">Giriş yap</button>
+        </div>
+        <div class="form-element-area mt-3 mb-3">
+          <a routerLink="/register">Üye ol</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="mb-5"></div>

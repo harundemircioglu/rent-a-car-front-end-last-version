@@ -1,0 +1,168 @@
+<app-bar></app-bar>
+<app-admin-background></app-admin-background>
+<div class="card">
+  <p-toast></p-toast>
+  <p-toolbar styleClass="mb-4 gap-2">
+    <ng-template pTemplate="left">
+      <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+    </ng-template>
+  </p-toolbar>
+  <p-table #dt [value]="cars" [rows]="5" [paginator]="true"
+    [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+    [tableStyle]="{ 'min-width': '75rem' }" [rowHover]="true" dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Id</th>
+        <th>Araç adı</th>
+        <th>Araç resmi</th>
+        <th>Vites tipi</th>
+        <th>Yakıt tipi</th>
+        <th>Araç kilometre</th>
+        <th>Araç tipi</th>
+        <th>Koltuk sayısı</th>
+        <th>Araç popülerliği</th>
+        <th>Ücret</th>
+        <th>Düzenle / Sil</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-car>
+      <tr>
+
+        <td>{{ car.id }}</td>
+
+        <td>{{ car.arac_adi }}</td>
+
+        <td>
+          <img style="max-width: 200px; max-height: 200px;" class="img-fluid" src="../../{{car.arac_resmi}}"
+            alt="{{car.arac_resmi}}">
+        </td>
+
+        <td>{{ car.vites_tipi }}</td>
+
+        <td>{{ car.yakit_tipi }}</td>
+
+        <td>{{ car.arac_kilometre }}</td>
+
+        <td>{{ car.arac_tipi }}</td>
+
+        <td>{{ car.arac_koltuk }}</td>
+
+        <td>{{ car.arac_popularite }}</td>
+
+        <td>{{ car.price }}</td>
+
+        <td>
+          <!-- (click)="editProduct(product)" -->
+          <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"
+            (click)="openEditDialog(car.id)"></button>
+          <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+            (click)="onDelete(car.id)"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<!-- Araç ekleme kodları -->
+
+<p-dialog [(visible)]="productDialog" [style]="{ width: '450px' }" header="New Car" [modal]="true" styleClass="p-fluid">
+  <ng-template pTemplate="content">
+    <div class="field">
+      <label for="name">Araç adı</label>
+      <input type="text" pInputText [(ngModel)]="carRequest.arac_adi" required autofocus />
+    </div>
+    <div class="field">
+      <label for="name">Araç resmi</label>
+      <input type="text" pInputText [(ngModel)]="carRequest.arac_resmi" required autofocus />
+    </div>
+    <div class="field">
+      <label for="name">Vites tipi</label>
+      <input type="text" pInputText [(ngModel)]="carRequest.vites_tipi" required autofocus />
+    </div>
+    <div class="field">
+      <label for="name">Yakıt tipi</label>
+      <input type="text" pInputText [(ngModel)]="carRequest.yakit_tipi" required autofocus />
+    </div>
+    <div class="field">
+      <label for="name">Araç kilometre</label>
+      <input type="text" pInputText [(ngModel)]="carRequest.arac_kilometre" required autofocus />
+    </div>
+    <div class="field">
+      <label for="name">Araç tipi</label>
+      <input type="text" pInputText [(ngModel)]="carRequest.arac_tipi" required autofocus />
+    </div>
+    <div class="field">
+      <label for="name">Araç koltuk</label>
+      <input type="text" pInputText [(ngModel)]="carRequest.arac_koltuk" required autofocus />
+    </div>
+    <div class="field">
+      <label for="name">Araç popülerite</label>
+      <input type="text" pInputText [(ngModel)]="carRequest.arac_popularite" required autofocus />
+    </div>
+    <div class="field">
+      <label for="name">Ücret</label>
+      <input type="text" pInputText [(ngModel)]="carRequest.price" required autofocus />
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+    <button pButton pRipple label="Add" icon="pi pi-check" class="p-button-text"
+      (click)="onCreate(carRequest)"></button>
+  </ng-template>
+</p-dialog>
+
+
+
+<!-- Araç güncelleme kodları -->
+
+<p-dialog *ngIf="carToEdit" [(visible)]="editDialog" [style]="{ width: '450px' }" header="Edit Car" [modal]="true"
+  styleClass="p-fluid">
+  <ng-template pTemplate="content">
+    <div class="field">
+      <label for="name">Araç adı</label>
+      <input type="text" pInputText [(ngModel)]="carToEdit.arac_adi" required autofocus />
+    </div>
+    <div class="field">
+      <label for="name">Araç resmi</label>
+      <input type="text" pInputText [(ngModel)]="carToEdit.arac_resmi" required autofocus />
+    </div>
+    <div class="field">
+      <label for="name">Vites tipi</label>
+      <input type="text" pInputText [(ngModel)]="carToEdit.vites_tipi" required autofocus />
+    </div>
+    <div class="field">
+      <label for="name">Yakıt tipi</label>
+      <input type="text" pInputText [(ngModel)]="carToEdit.yakit_tipi" required autofocus />
+    </div>
+    <div class="field">
+      <label for="name">Araç kilometre</label>
+      <input type="text" pInputText [(ngModel)]="carToEdit.arac_kilometre" required autofocus />
+    </div>
+    <div class="field">
+      <label for="name">Araç tipi</label>
+      <input type="text" pInputText [(ngModel)]="carToEdit.arac_tipi" required autofocus />
+    </div>
+    <div class="field">
+      <label for="name">Araç koltuk</label>
+      <input type="text" pInputText [(ngModel)]="carToEdit.arac_koltuk" required autofocus />
+    </div>
+    <div class="field">
+      <label for="name">Araç popülerite</label>
+      <input type="text" pInputText [(ngModel)]="carToEdit.arac_popularite" required autofocus />
+    </div>
+    <div class="field">
+      <label for="name">Ücret</label>
+      <input type="text" pInputText [(ngModel)]="carToEdit.price" required autofocus />
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+    <button pButton pRipple label="Update" icon="pi pi-check" class="p-button-text"
+      (click)="onUpdate(carToEdit.id, carToEdit)"></button>
+  </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

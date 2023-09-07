@@ -1,0 +1,90 @@
+<app-bar></app-bar>
+<app-admin-background></app-admin-background>
+<div class="card">
+  <p-toast></p-toast>
+
+
+  <!-- <p-toolbar styleClass="mb-4 gap-2">
+    <ng-template pTemplate="left">
+      <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
+    </ng-template>
+  </p-toolbar> -->
+
+
+
+  <!-- <ng-template pTemplate="right">
+    <div class="row">
+      <div class="col">
+        <input type="text" [(ngModel)]="searchName" placeholder="İsim ara" (input)="searchPerson(searchName)"
+          class="form-control">
+      </div>
+    </div>
+  </ng-template> -->
+
+  <input type="text" [(ngModel)]="filteredUsers" placeholder="İsim ara" class="form-control">
+
+  <p-table #dt [value]="users" [rows]="10" [paginator]="true" [tableStyle]="{ 'min-width': '75rem' }" [rowHover]="true"
+    dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [showCurrentPageReport]="true">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Id</th>
+        <th>Tc No</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Edit / Delete</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+      <tr>
+        <!-- ID -->
+        <td>{{ user.id }}</td>
+        <!-- TCNO -->
+        <td>{{ user.tc_no }}</td>
+        <!-- NAME -->
+        <td>{{ user.userName }}</td>
+        <!-- EMAIL -->
+        <td>{{ user.email }}</td>
+        <!--  -->
+        <td>{{ user.phone }}</td>
+        <td>
+          <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"
+            (click)="editUser(user.id)"></button>
+          <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+            (click)="onDelete(user.id)"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<p-dialog *ngIf="updatedUser" [(visible)]="updateDialog" [style]="{ width: '450px' }" header="User Update"
+  [modal]="true" styleClass="p-fluid">
+  <ng-template pTemplate="content">
+    <div class="field">
+      <label for="name">TC NO</label>
+      <input type="text" [(ngModel)]="updatedUser.tc_no" pInputText id="tc_no" required autofocus />
+    </div>
+    <div class="field">
+      <label for="name">Name</label>
+      <input type="text" [(ngModel)]="updatedUser.userName" pInputText id="userName" required />
+    </div>
+    <div class="field">
+      <label for="name">Email</label>
+      <input type="text" [(ngModel)]="updatedUser.email" pInputText id="email" required />
+    </div>
+    <div class="field">
+      <label for="name">Phone</label>
+      <input type="text" [(ngModel)]="updatedUser.phone" pInputText id="phone" required />
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+    <button pButton pRipple label="Update" icon="pi pi-check" class="p-button-text"
+      (click)="onUpdate(updatedUser.id,updatedUser)"></button>
+  </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

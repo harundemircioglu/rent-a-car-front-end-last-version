@@ -1,0 +1,39 @@
+<app-navbar></app-navbar>
+
+<div class="hero-wrap ftco-degree-bg" style="background-image: url('../../assets/images/havali_araba_7.jpg');"
+  data-stellar-background-ratio="0.5">
+  <div class="overlay"></div>
+</div>
+
+<!-- LOGİN FORM  -->
+<div class="container">
+  <div class="main-form-area">
+    <div class="form-area">
+      <form>
+        <div class="form-element-area mt-3">
+          <input [(ngModel)]="registerRequest.tc_no" [ngModelOptions]="{standalone: true}" type="text" name="tc_no" maxlength="11" class="form-text" placeholder="TC Kimlik No">
+        </div>
+        <div class="form-element-area mt-3">
+          <input [(ngModel)]="registerRequest.UserName" [ngModelOptions]="{standalone: true}" type="text" name="UserName" class="form-text" placeholder="Ad">
+        </div>
+        <div class="form-element-area mt-3">
+          <input [(ngModel)]="registerRequest.Email" [ngModelOptions]="{standalone: true}" type="text" name="Email" class="form-text" placeholder="E-posta">
+        </div>
+        <div class="form-element-area mt-3">
+          <input [(ngModel)]="registerRequest.phone" [ngModelOptions]="{standalone: true}" type="text" name="phone" maxlength="10" class="form-text" placeholder="Telefon">
+        </div>
+        <div class="form-element-area mt-3">
+          <input [(ngModel)]="registerRequest.Password" [ngModelOptions]="{standalone: true}" type="password" name="Password" class="form-text" placeholder="Şifre">
+        </div>
+        <div class="form-element-area mt-3 mb-3">
+          <button (click)="register()" type="button">Üye ol</button>
+        </div>
+        <div class="form-element-area mt-3 mb-3">
+          <a routerLink="/login">Giriş yap</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="mb-5"></div>

@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">Car<span>Book</span></a>
+    <button class="navbar-toggler" type="button" (click)="toggleMenu()"
+      [attr.aria-expanded]="isMenuOpen ? 'true' : 'false'" aria-controls="ftco-nav"
+      [attr.aria-label]="isMenuOpen ? 'Close navigation' : 'Toggle navigation'">
+      <span class="oi oi-menu"></span> Menu
+    </button>
+
+    <div class="collapse navbar-collapse" [ngClass]="{ 'show': isMenuOpen }" id="ftco-nav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item" *ngIf="!isLoggedIn"><a routerLink="/login" class="nav-link">Login</a></li>
+        <li class="nav-item" *ngIf="!isLoggedIn"><a routerLink="/register" class="nav-link">Register</a></li>
+        <li class="nav-item" *ngIf="openPanel"><a routerLink="/admin/home" class="nav-link">Dashboard</a></li>
+        <li class="nav-item" *ngIf="isLoggedIn"><a routerLink="/profile" class="nav-link">Profile</a></li>
+        <li class="nav-item" *ngIf="isLoggedIn"><a routerLink="/logout" (click)="logout()" class="nav-link">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

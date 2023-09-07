@@ -1,0 +1,76 @@
+<app-bar></app-bar>
+<app-admin-background></app-admin-background>
+<p-toast></p-toast>
+<p-table [value]="reservations" #dt [rows]="10" [paginator]="true" [tableStyle]="{ 'min-width': '75rem' }"
+  [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [showCurrentPageReport]="true">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Id</th>
+      <th>Kullanıcı</th>
+      <th>Araç</th>
+      <th>Araç alış konumu</th>
+      <th>Araç bırakış konumu</th>
+      <th>Araç bırakış tarihi</th>
+      <th>Araç bırakış tarihi</th>
+      <th>Düzenle / Sil</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-reservation>
+    <tr>
+      <td>{{ reservation.id }}</td>
+      <td>{{ reservation.user_id }}</td>
+      <td>{{ reservation.car_id}}</td>
+      <td>{{ reservation.car_pickup_location }}</td>
+      <td>{{ reservation.car_dropoff_location }}</td>
+      <td>{{ reservation.pick_Up_Date }}</td>
+      <td>{{ reservation.choose_A_Date }}</td>
+      <td>
+        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"
+          (click)="openUpdateDialog(reservation.id)"></button>
+        <!-- (click)="editUser(user.id)" -->
+        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+          (click)="onDelete(reservation.id)"></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<!-- *ngIf="updatedUser" [(visible)]="updateDialog" -->
+<p-dialog *ngIf="selectedReservation" [visible]="updateDialog" [style]="{ width: '450px' }" header="Reservation Update"
+  [modal]="true" styleClass="p-fluid">
+  <ng-template pTemplate="content">
+    <div class="field">
+      <label for="name">Kullanıcı ID</label>
+      <input type="text" [(ngModel)]="selectedReservation.user_id" pInputText autofocus />
+    </div>
+    <div class="field">
+      <label for="name">Araç ID</label>
+      <input type="text" [(ngModel)]="selectedReservation.car_id" pInputText />
+    </div>
+    <div class="field">
+      <label for="name">Araç alış konumu</label>
+      <input type="text" [(ngModel)]="selectedReservation.car_pickup_location" pInputText />
+    </div>
+    <div class="field">
+      <label for="name">Araç bırakış konumu</label>
+      <input type="text" [(ngModel)]="selectedReservation.car_dropoff_location" pInputText />
+    </div>
+    <div class="field">
+      <label for="name">Araç alış tarihi</label>
+      <input type="text" [(ngModel)]="selectedReservation.pick_Up_Date" pInputText />
+    </div>
+    <div class="field">
+      <label for="name">Araç bırakış tarihi</label>
+      <input type="text" [(ngModel)]="selectedReservation.choose_A_Date" pInputText />
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+
+    <button pButton pRipple label="Update" icon="pi pi-check" class="p-button-text"
+      (click)="onUpdate(selectedReservation.id,selectedReservation)"></button>
+
+  </ng-template>
+</p-dialog>
